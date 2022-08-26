@@ -32,7 +32,7 @@ axios.post("https://pubsuby.xyz/api/publish",{
 })
 ```
 
-### Running
+### Running locally
 
 ```bash
 git clone git@github.com:stliakis/pubsuby.git;
