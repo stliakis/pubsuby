@@ -4,12 +4,12 @@ A simple ready to deploy Pub-Sub over REST using Redis as a broker written in ty
 
 ## Usage
 
-You can the try pubsuby live on pubsuby.io, just be careful because everyone can subscribe to
+You can the try pubsuby live on pubsuby.xyz, just be careful because everyone can subscribe to
 the service and listen to your messages.
 
 ### Listen for messages in topics
 ```javascript
-let socket = new WebSocket("wss://pubsuby.io/api/subscribe?topic=test-topic");
+let socket = new WebSocket("wss://pubsuby.xyz/api/subscribe?topic=test-topic");
 
 socket.onmessage = function (e) {
     const {topic, payload} = JSON.parse(e.data)
@@ -19,9 +19,9 @@ socket.onmessage = function (e) {
 
 ### Publish events
 ```javascript
-axios.post("https://pubsuby.io/api/publish",{
+axios.post("https://pubsuby.xyz/api/publish",{
   headers:{
-      "secret-api-key": "secret-api-key"
+      "secret-api-key": "notsecretapikey"
   },
   data:{
     topic: "test-topic",

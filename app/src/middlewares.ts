@@ -8,7 +8,7 @@ async function requiredSecretApiKey(req: Request, res: Response, next: NextFunct
       error: "Missing secret api key",
     });
     return;
-  } else if (secret != Config.get("SECRET_API_KEY", "secret-api-key")) {
+  } else if (secret != Config.get("SECRET_API_KEY", "notsecretapikey")) {
     res.status(401).json({
       error: "Invalid secret api key",
     });
