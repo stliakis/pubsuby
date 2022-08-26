@@ -2,7 +2,7 @@
   "name": "sub-puby",
   "version": "1.0.0",
   "scripts": {
-    "start": "ts-node app/server.ts",
+    "start": "ts-node src/server.ts",
     "dev": "nodemon -e ts -w ./src -x 'tsc ./src/*.ts;ts-node src/server.ts'",
     "lint": "next lint",
     "prettier": "prettier --write \"./app/**/*.{js,ts,tsx}\""

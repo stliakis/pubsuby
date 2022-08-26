@@ -3,7 +3,7 @@ version: '3.3'
 services:
   pubsuby:
     image: ghcr.io/stliakis/pubsuby-pubsuby:production
-    command: bash -c "/app/startup.sh;npm run start"
+    command: bash -c "cd /app;yarn run start"
     deploy:
       replicas: 1
       update_config:
