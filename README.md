@@ -7,8 +7,6 @@ A simple ready to deploy Pub-Sub over REST using Redis as a broker written in ty
 You can the try pubsuby live on pubsuby.io, just be careful because everyone can subscribe to
 the service and listen to your messages.
 
-```bash
-
 ### Listen for messages in topics
 ```javascript
 let socket = new WebSocket("wss://pubsuby.io/api/subscribe?topic=test-topic");
