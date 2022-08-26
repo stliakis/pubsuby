@@ -17,7 +17,7 @@ socket.onmessage = function (e) {
 }
 ```
 
-### Publish events
+### Publish messages
 ```javascript
 axios.post("https://pubsuby.xyz/api/publish",{
   headers:{
