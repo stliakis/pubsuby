@@ -5,17 +5,17 @@ abstract class Broker {
 
   abstract publishMessage(topic: string | null, message: any): void;
 
-  abstract quit(): void
+  abstract quit(): void;
 }
 
 class RedisBroker extends Broker {
-  redis: Redis
-  channel: string
-  hasSubscribed: boolean = false
+  redis: Redis;
+  channel: string;
+  hasSubscribed: boolean = false;
 
   constructor(connectionString: string, channel: string) {
     super();
-    this.channel = channel
+    this.channel = channel;
     this.redis = new Redis({
       host: connectionString.split(":")[0],
       port: parseInt(connectionString.split(":")[1]),
@@ -23,10 +23,13 @@ class RedisBroker extends Broker {
   }
 
   publishMessage(topic: string, message: object) {
-    this.redis.publish(this.channel, JSON.stringify({
-      topic,
-      payload: message
-    }));
+    this.redis.publish(
+      this.channel,
+      JSON.stringify({
+        topic,
+        payload: message,
+      })
+    );
   }
 
   onMessage(callback: Function) {
@@ -34,18 +37,15 @@ class RedisBroker extends Broker {
       this.redis.subscribe(this.channel);
     }
     this.redis.on("message", (channel, message) => {
-        const parsedMessage = JSON.parse(message)
-        const {topic, payload} = parsedMessage;
-        callback(topic, payload);
-      }
-    );
+      const parsedMessage = JSON.parse(message);
+      const { topic, payload } = parsedMessage;
+      callback(topic, payload);
+    });
   }
 
   quit() {
-    this.redis.quit()
+    this.redis.quit();
   }
 }
 
-export {
-  RedisBroker, Broker
-}
+export { RedisBroker, Broker };

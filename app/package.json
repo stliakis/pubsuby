@@ -5,7 +5,7 @@
     "start": "ts-node src/server.ts",
     "dev": "nodemon -e ts -w ./src -x 'tsc ./src/*.ts;ts-node src/server.ts'",
     "lint": "next lint",
-    "prettier": "prettier --write \"./app/**/*.{js,ts,tsx}\""
+    "prettier": "prettier --write \"./src/**/*.{js,ts,tsx}\""
   },
   "description": "A pub-sub system written in typescript, using redis as broker",
   "main": "src/index.ts",
@@ -23,7 +23,7 @@
   "devDependencies": {
     "eslint": "^6.8.0",
     "nodemon": "^1.18.4",
-    "prettier": "2.5.1",
+    "prettier": "^2.7.1",
     "ts-node": "^8.0.3"
   }
 }

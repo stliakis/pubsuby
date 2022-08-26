@@ -1,13 +1,12 @@
-import {Broker} from "./broker";
-
+import { Broker } from "./broker";
 
 class Pubsuby {
   broker: Broker;
-  config: PubsubyConfig
+  config: PubsubyConfig;
 
   constructor(broker: Broker, config: PubsubyConfig = new PubsubyConfig()) {
     this.broker = broker;
-    this.config = config
+    this.config = config;
   }
 
   publishEvent(topic: string | null, payload: object) {
@@ -17,23 +16,18 @@ class Pubsuby {
   subscribe(topics: string[], callback: Function) {
     this.broker.onMessage((topic: string, payload: object) => {
       if (topics.length === 0 || topics.includes(topic)) {
-        callback(topic, payload)
+        callback(topic, payload);
       }
-    })
+    });
   }
 
   unsubscribe() {
-    this.broker.quit()
+    this.broker.quit();
   }
 }
 
 class PubsubyConfig {
-  constructor() {
-
-  }
+  constructor() {}
 }
 
-export {
-  Pubsuby,
-  PubsubyConfig
-}
+export { Pubsuby, PubsubyConfig };

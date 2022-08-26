@@ -1,7 +1,11 @@
 import Config from "./config";
-import {NextFunction, Request, Response,} from "express"
+import { NextFunction, Request, Response } from "express";
 
-async function requiredSecretApiKey(req: Request, res: Response, next: NextFunction) {
+async function requiredSecretApiKey(
+  req: Request,
+  res: Response,
+  next: NextFunction
+) {
   let secret = req.headers["secret-api-key"] || req.body["secret-api-key"];
   if (!secret) {
     res.status(401).json({
@@ -17,7 +21,4 @@ async function requiredSecretApiKey(req: Request, res: Response, next: NextFunct
   next();
 }
 
-
-export {
-  requiredSecretApiKey,
-}
+export { requiredSecretApiKey };
