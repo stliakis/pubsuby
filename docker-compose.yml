@@ -13,7 +13,7 @@ services:
     environment:
       - REDIS_BROKER=redis:6379
       - SECRET_API_KEY=$SECRET_API_KEY
-      -
+
   redis:
     image: redis/redis-stack-server:latest
 
