@@ -1,0 +1,53 @@
+name: Production server build & deploy
+
+on: [workflow_dispatch]
+
+jobs:
+  build_and_push:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout the repo
+        uses: actions/checkout@v2
+
+      - name: Create env file
+        run: |
+          touch .env
+          echo "SECRET_API_KEY=${{ secrets.PRODUCTION_SECRET_API_KEY }}" >> .env
+          cat .env
+
+      - name: Build image
+        run: docker compose -f docker-compose.yml -f docker-compose.production.yml build
+
+      - name: Login to GitHub Container Registry
+        uses: docker/login-action@v1
+        with:
+          registry: ghcr.io
+          username: ${{ github.actor }}
+          password: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Push image to DO Container Registry
+        run: docker compose -f docker-compose.yml -f docker-compose.production.yml push
+
+      - name: Copy the docker compose & .env files to the server
+        uses: appleboy/scp-action@master
+        with:
+          host: ${{ secrets.PRODUCTION_SERVER_SSH_HOST }}
+          username: ${{ secrets.PRODUCTION_SERVER_SSH_USERNAME }}
+          key: ${{ secrets.PRODUCTION_SERVER_SSH_SECRET }}
+          port: ${{ secrets.PRODUCTION_SERVER_SSH_PORT }}
+          source: "docker-compose.production.yml,.env"
+          target: "/app"
+
+      - name: Start the stack
+        uses: appleboy/ssh-action@master
+        with:
+          host: ${{ secrets.PRODUCTION_SERVER_SSH_HOST }}
+          username: ${{ secrets.PRODUCTION_SERVER_SSH_USERNAME }}
+          key: ${{ secrets.PRODUCTION_SERVER_SSH_SECRET }}
+          port: ${{ secrets.PRODUCTION_SERVER_SSH_PORT }}
+          script: |
+            mkdir /app
+            cd /app
+            echo "${{ secrets.GITHUB_TOKEN }}" | docker login ghcr.io --username ${{ github.actor }} --password-stdin
+            docker stack deploy -c docker-compose.production.yml --resolve-image=always --with-registry-auth pubsuby
+            sleep 5

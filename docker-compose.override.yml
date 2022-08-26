@@ -1,0 +1,15 @@
+version: '2'
+
+services:
+  pubsuby:
+    build:
+      args:
+        ENVIRONMENT: development
+    volumes:
+      - ./app:/app
+    command: bash -c "cd /app;yarn run dev"
+    environment:
+      - SECRET_API_KEY=$SECRET_API_KEY
+  proxy:
+    ports:
+      - "4545:80"

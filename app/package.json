@@ -1,0 +1,29 @@
+{
+  "name": "sub-puby",
+  "version": "1.0.0",
+  "scripts": {
+    "start": "ts-node app/server.ts",
+    "dev": "nodemon -e ts -w ./src -x 'tsc ./src/*.ts;ts-node src/server.ts'",
+    "lint": "next lint",
+    "prettier": "prettier --write \"./app/**/*.{js,ts,tsx}\""
+  },
+  "description": "A pub-sub system written in typescript, using redis as broker",
+  "main": "src/index.ts",
+  "repository": "https://github.com/stliakis/pub-suby",
+  "author": "Stefanos Liakis",
+  "license": "MIT",
+  "dependencies": {
+    "@types/express": "^4.17.13",
+    "@types/express-ws": "^3.0.1",
+    "@types/node": "^18.7.13",
+    "express": "^4.18.1",
+    "express-ws": "^5.0.2",
+    "ioredis": "^5.2.3"
+  },
+  "devDependencies": {
+    "eslint": "^6.8.0",
+    "nodemon": "^1.18.4",
+    "prettier": "2.5.1",
+    "ts-node": "^8.0.3"
+  }
+}

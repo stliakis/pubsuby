@@ -1,0 +1,33 @@
+version: '2'
+
+services:
+  pubsuby:
+    build:
+      context: ./app
+      dockerfile: pubsuby.dockerfile
+      args:
+        ENVIRONMENT: production
+    command: bash -c "cd /app;yarn run start"
+    depends_on:
+      - redis
+    environment:
+      - REDIS_BROKER=redis:6379
+      - SECRET_API_KEY=$SECRET_API_KEY
+    env_file:
+      - .env
+
+  redis:
+    image: redis/redis-stack-server:latest
+    env_file:
+      - .env
+
+  proxy:
+    ports:
+      - "80:80"
+    build:
+      context: ./proxy
+      dockerfile: nginx-proxy.dockerfile
+    depends_on:
+      - pubsuby
+    env_file:
+      - .env
