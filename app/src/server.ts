@@ -1,9 +1,10 @@
 import express from "express";
-import {Pubsuby, RedisBroker} from "./pubsuby";
+import {Pubsuby} from "./pubsuby";
 import expressWs from 'express-ws'
 import {listify} from "./utils";
 import {requiredSecretApiKey} from "./middlewares";
 import Config from "./config";
+import {RedisBroker} from "./broker";
 
 let wsInstance = expressWs(express());
 let {app} = wsInstance;
