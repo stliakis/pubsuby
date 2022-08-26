@@ -1,6 +1,6 @@
 # Pubsuby 
 
-A simple ready to deploy Pub-Sub over REST using Redis as a broker written in typescript. 
+A simple self hosted Pub-Sub over REST using Redis as a broker written in typescript. 
 
 ## Usage
 
