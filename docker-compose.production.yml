@@ -9,11 +9,28 @@ services:
       update_config:
         failure_action: rollback
         delay: 30s
+    depends_on:
+      - redis
+    environment:
+      - REDIS_BROKER=redis:6379
+    env_file:
+      - .env
+
+  redis:
+    image: redis/redis-stack-server:latest
+    env_file:
+      - .env
 
   proxy:
     image: ghcr.io/stliakis/pubsuby-proxy:production
+    ports:
+      - "80:80"
     deploy:
       replicas: 1
       update_config:
         failure_action: rollback
         delay: 30s
+    depends_on:
+      - pubsuby
+    env_file:
+      - .env

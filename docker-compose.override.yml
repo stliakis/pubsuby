@@ -10,6 +10,7 @@ services:
     command: bash -c "cd /app;yarn run dev"
     environment:
       - SECRET_API_KEY=$SECRET_API_KEY
+
   proxy:
     ports:
       - "4545:80"
