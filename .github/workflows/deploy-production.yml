@@ -46,7 +46,7 @@ jobs:
           key: ${{ secrets.PRODUCTION_SERVER_SSH_SECRET }}
           port: ${{ secrets.PRODUCTION_SERVER_SSH_PORT }}
           script: |
-            mkdir /app
+            mkdir -p /app
             cd /app
             echo "${{ secrets.GITHUB_TOKEN }}" | docker login ghcr.io --username ${{ github.actor }} --password-stdin
             docker stack deploy -c docker-compose.production.yml --resolve-image=always --with-registry-auth pubsuby
