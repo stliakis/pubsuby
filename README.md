@@ -79,7 +79,6 @@ docker swarm init
 ssh-keygen -C "pubsuby@acme.io" 
 ```
 6. Append the newly generated public key to the server's authorized_keys file at ```/root/.ssh/authorized_keys``` (you can use a user other than root but make sure your perms are correct)
-```bash
 7. Add the following secrets to your fork's Github action secrets
 ```bash
 PRODUCTION_SERVER_SSH_HOST=pubsuby.acme.io
