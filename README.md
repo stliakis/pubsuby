@@ -4,7 +4,7 @@ A simple self hosted Pub-Sub over REST using Redis as a broker written in typesc
 
 ## Usage
 
-You can the try pubsuby live on pubsuby.xyz, just be careful because everyone can subscribe to
+You can try pubsuby live on pubsuby.xyz, just be careful because everyone can subscribe to
 the service and listen to your messages.
 
 ### Listen for messages in topics
